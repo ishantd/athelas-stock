@@ -30,9 +30,7 @@ class Finnhub():
         return prices
 
     def get_percentage_change_from_previous_close(self, symbol):
-        quote = self.symbol_quote_data[symbol]
-        percentage_change = (quote['c'] - quote['pc']) / quote['pc'] * 100
-        return percentage_change
+        return self.symbol_quote_data[symbol]["dp"]
     
     def get_most_volatile_stock(self, symbols=None):
         symbols = symbols or self.default_symbols
