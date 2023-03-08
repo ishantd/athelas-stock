@@ -23,8 +23,7 @@ class Finnhub():
         return quote['c']
 
     def get_prices(self, symbols=None):
-        symbols = symbols or self.default_symbols
-        _ = [self.get_price(symbol) for symbol in symbols]
+        [self.get_price(symbol) for symbol in (symbols or self.default_symbols)]
         return self.symbol_quote_data
 
     def get_percentage_change_from_previous_close(self, symbol):
