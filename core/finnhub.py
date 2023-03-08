@@ -36,6 +36,8 @@ class Finnhub():
         return self.symbol_quote_data
 
     def fetch_prices(self, symbols=None):
+        # we use the concurrent.futures module to fetch the prices in parallel
+        # this is much faster than fetching the prices sequentially
         with concurrent.futures.ThreadPoolExecutor() as executor:
             # Submit a thread for each symbol
             futures = [executor.submit(self.get_price, symbol) for symbol in (symbols or self.default_symbols)]
