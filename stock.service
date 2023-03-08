@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve the stocks app
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/code/stock
+Environment="PATH=/home/ubuntu/code/stock/env/bin"
+ExecStart=/home/ubuntu/code/stock/env/bin/gunicorn --workers 3 --bind unix:stocks.sock -m 007 wsgi:app
+EnvironmentFile=/home/ubuntu/code/stock/.env
+
+[Install]
+WantedBy=multi-user.target
