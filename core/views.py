@@ -6,5 +6,6 @@ finnhub = Finnhub(app.config['FINNHUB_API_KEY'])
 
 @app.route('/')
 def index():
-    prices = finnhub.get_prices(['AAPL', 'AMZN', 'NFLX', 'META', 'GOOGL'])
-    return render_template('index.html', prices=prices)
+    prices = finnhub.get_prices()
+    most_volatile_stock = finnhub.get_most_volatile_stock()
+    return render_template('index.html', prices=prices, most_volatile_stock=most_volatile_stock)
