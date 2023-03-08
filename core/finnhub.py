@@ -24,10 +24,8 @@ class Finnhub():
 
     def get_prices(self, symbols=None):
         symbols = symbols or self.default_symbols
-        prices = {}
-        for symbol in symbols:
-            prices[symbol] = self.get_price(symbol)
-        return prices
+        _ = [self.get_price(symbol) for symbol in symbols]
+        return self.symbol_quote_data
 
     def get_percentage_change_from_previous_close(self, symbol):
         return self.symbol_quote_data[symbol]["dp"]
@@ -39,6 +37,5 @@ class Finnhub():
         for symbol in symbols:
             percentage_change = self.get_percentage_change_from_previous_close(symbol)
             if percentage_change > most_volatile_stock_percentage_change:
-                most_volatile_stock = symbol
-                most_volatile_stock_percentage_change = percentage_change
+                most_volatile_stock, most_volatile_stock_percentage_change = symbol, percentage_change
         return {"symbol": most_volatile_stock, "percentage_change": round(most_volatile_stock_percentage_change, 2)}

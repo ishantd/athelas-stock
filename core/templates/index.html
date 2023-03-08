@@ -15,7 +15,7 @@
         <h1>Latest Stock Prices</h1>
         <ul>
             {% for key, value in prices.items() %}
-            <li>{{key}}: {{value}}</li>
+            <li>{{key}}: {{value.c}}</li>
             {% endfor %}
         </ul>
 
