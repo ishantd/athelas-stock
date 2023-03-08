@@ -19,7 +19,10 @@
             {% endfor %}
         </ul>
 
-        <h2>Most Volatile Stock: {{most_volatile_stock.symbol}} ({{most_volatile_stock.percentage_change}})</h2>
+        <h2>
+            Most Volatile Stock: {{most_volatile_stock.symbol}}
+            ({{most_volatile_stock.percentage_change}})
+        </h2>
 
         <form method="post">
             <button type="submit" class="btn btn-primary">Download CSV</button>
