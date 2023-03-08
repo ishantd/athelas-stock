@@ -1,13 +1,10 @@
 from flask import render_template
 from core import app
+from core.finnhub import Finnhub
+
+finnhub = Finnhub(app.config['FINNHUB_API_KEY'])
 
 @app.route('/')
 def index():
-    prices = {
-        "APPLE": 1.2,
-        "AMAZON": 3.45,
-        "NETFLIX": 2.34,
-        "FACEBOOK": 1.23,
-        "GOOGLE": 1.54
-    }
+    prices = finnhub.get_prices(['AAPL', 'AMZN', 'NFLX', 'META', 'GOOGL'])
     return render_template('index.html', prices=prices)
