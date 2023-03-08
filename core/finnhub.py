@@ -63,3 +63,36 @@ class Finnhub():
                 # then update the most volatile stock
                 most_volatile_stock, most_volatile_stock_percentage_change = symbol, percentage_change
         return {"symbol": most_volatile_stock, "percentage_change": round(most_volatile_stock_percentage_change, 2)}
+    
+    def get_csv_for_most_volatile_stock(self, symbols=None):
+        # this method returns a CSV string for the most volatile stock
+        # the format is: stock_symbol,percentage_change,current_price,last_close_price
+        
+        # update the symbol quote data
+        self.fetch_prices(symbols)
+        
+        # get the most volatile stock
+        most_volatile_stock = self.get_most_volatile_stock(symbols)
+        
+        # get the data for the most volatile stock
+        most_volatile_stock_data = self.symbol_quote_data[most_volatile_stock["symbol"]]
+                
+        # return the CSV string with the header
+        # Create a list of the required fields for the CSV
+        csv_fields = [
+            most_volatile_stock["symbol"],
+            f"{most_volatile_stock_data['dp']:.2f}%",
+            f"${most_volatile_stock_data['c']:.2f}",
+            f"${most_volatile_stock_data['pc']:.2f}"
+        ]
+        
+        # Join the fields into a CSV string
+        csv_string = ','.join(csv_fields)
+        
+        # Add the header to the CSV string
+        header = "symbol,percentage_change,current_price,last_close_price"
+        csv_string = f"{header}\n{csv_string}"
+        
+        # Return the CSV string
+        return csv_string
+            
