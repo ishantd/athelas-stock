@@ -48,7 +48,9 @@ class Finnhub():
         return self.symbol_quote_data
 
     def get_percentage_change_from_previous_close(self, symbol):
-        return self.symbol_quote_data[symbol]["dp"]
+        # this method returns the percentage change from the previous close
+        # return abs because we want the absolute value to counteract negative values
+        return abs(self.symbol_quote_data[symbol]["dp"])
     
     def get_most_volatile_stock(self, symbols=None):
         # this method returns the symbol and percentage change for the most volatile stock
