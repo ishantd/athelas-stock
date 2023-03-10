@@ -21,7 +21,13 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <h2 class="text-center">Most Volatile Stock: {{most_volatile_stock.symbol}} ({{most_volatile_stock.percentage_change}})</h2>
+                <h2 class="text-center">Most Volatile Stock: {{most_volatile_stock.symbol}}
+                    {% if prices[most_volatile_stock.symbol].dp > 0 %}
+                    <span class="badge badge-success">{{prices[most_volatile_stock.symbol].dp}}%</span>
+                    {% else %}
+                    <span class="badge badge-danger">{{prices[most_volatile_stock.symbol].dp}}%</span>
+                    {% endif %}
+                </h2>
             </div>
         </div>
 
